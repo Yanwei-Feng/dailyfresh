@@ -9,12 +9,12 @@ from db.base_model import BaseModel
 
 class User(AbstractUser, BaseModel):
     """用户模型类"""
-    def generate_active_token(self):
-        """生成用户签名字符串"""
-        serializer = Serializer(settings.SECRET_KEY, 3600)
-        info = {'confirm': self.id}
-        token = serializer.dumps(info)
-        return token.decode()
+    # def generate_active_token(self):
+    #     """生成用户签名字符串"""
+    #     serializer = Serializer(settings.SECRET_KEY, 3600)
+    #     info = {'confirm': self.id}
+    #     token = serializer.dumps(info)
+    #     return token.decode()
 
     class Meta:
         db_table='df_user'
@@ -24,7 +24,7 @@ class User(AbstractUser, BaseModel):
 
 class Address(BaseModel):
     """地址模型类"""
-    user = models.ForeignKey('User', verbose_name='所属账户')
+    user = models.ForeignKey('User', verbose_name='所属账户', on_delete=models.CASCADE)
     receiver = models.CharField(max_length=20, verbose_name='收件人')
     addr = models.CharField(max_length=256, verbose_name='收件地址')
     zip_code = models.CharField(max_length=6, null=True, verbose_name='邮政编码')

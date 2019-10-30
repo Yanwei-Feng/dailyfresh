@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('create_time', models.DateTimeField(verbose_name='创建时间', auto_now_add=True)),
                 ('update_time', models.DateTimeField(verbose_name='更新时间', auto_now=True)),
-                ('is_delete', models.DateTimeField(verbose_name='删除标记', default=False)),
+                ('is_delete', models.BooleanField(verbose_name='删除标记', default=False)),
                 ('count', models.IntegerField(verbose_name='商品数目', default=1)),
                 ('price', models.DecimalField(verbose_name='商品价格', max_digits=10, decimal_places=2)),
                 ('comment', models.CharField(verbose_name='评论', max_length=256)),
@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('create_time', models.DateTimeField(verbose_name='创建时间', auto_now_add=True)),
                 ('update_time', models.DateTimeField(verbose_name='更新时间', auto_now=True)),
-                ('is_delete', models.DateTimeField(verbose_name='删除标记', default=False)),
+                ('is_delete', models.BooleanField(verbose_name='删除标记', default=False)),
                 ('order_id', models.CharField(verbose_name='订单编号', primary_key=True, max_length=128, serialize=False)),
                 ('pay_method', models.SmallIntegerField(verbose_name='支付方式', default=3, choices=[(1, '货到付款'), (2, '微信支付'), (3, '支付宝'), (4, '银联支付')])),
                 ('total_count', models.IntegerField(verbose_name='商品数量', default=1)),

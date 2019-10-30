@@ -2,10 +2,10 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import django.core.validators
 from django.conf import settings
-import django.utils.timezone
 import django.contrib.auth.models
+import django.utils.timezone
+import django.core.validators
 
 
 class Migration(migrations.Migration):
@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('date_joined', models.DateTimeField(verbose_name='date joined', default=django.utils.timezone.now)),
                 ('create_time', models.DateTimeField(verbose_name='创建时间', auto_now_add=True)),
                 ('update_time', models.DateTimeField(verbose_name='更新时间', auto_now=True)),
-                ('is_delete', models.DateTimeField(verbose_name='删除标记', default=False)),
+                ('is_delete', models.BooleanField(verbose_name='删除标记', default=False)),
                 ('groups', models.ManyToManyField(verbose_name='groups', blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.Group')),
                 ('user_permissions', models.ManyToManyField(verbose_name='user permissions', blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.Permission')),
             ],
@@ -50,13 +50,13 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('create_time', models.DateTimeField(verbose_name='创建时间', auto_now_add=True)),
                 ('update_time', models.DateTimeField(verbose_name='更新时间', auto_now=True)),
-                ('is_delete', models.DateTimeField(verbose_name='删除标记', default=False)),
+                ('is_delete', models.BooleanField(verbose_name='删除标记', default=False)),
                 ('receiver', models.CharField(verbose_name='收件人', max_length=20)),
                 ('addr', models.CharField(verbose_name='收件地址', max_length=256)),
                 ('zip_code', models.CharField(verbose_name='邮政编码', max_length=6, null=True)),
                 ('phone', models.CharField(verbose_name='联系人', max_length=11)),
                 ('is_default', models.BooleanField(verbose_name='是否默认', default=False)),
-                ('user', models.ForeignKey(verbose_name='所属账户', to=settings.AUTH_USER_MODEL)),
+                ('user', models.ForeignKey(verbose_name='所属账户', to=settings.AUTH_USER_MODEL,on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name': '地址',
